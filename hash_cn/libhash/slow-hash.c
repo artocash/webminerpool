@@ -177,6 +177,10 @@ extern int aesb_pseudo_round(const uint8_t *in, uint8_t *out, const uint8_t *exp
   p[0] = a[0];  p[1] = a[1]; \
   a[0] ^= b[0]; a[1] ^= b[1]; \
   VARIANT1_2(p + 1); \
+  if (variant > 2) \
+  { \
+    *(p + 1) ^= *(p);\
+  }\
   _b = _c; \
 
 #if defined(_MSC_VER)
@@ -774,6 +778,10 @@ union cn_slow_hash_state
   p[0] = a[0];  p[1] = a[1]; \
   a[0] ^= b[0]; a[1] ^= b[1]; \
   VARIANT1_2(p + 1); \
+  if (variant > 2) \
+  { \
+    *(p + 1) ^= *(p);\
+  }\
   _b = _c; \
 
 
